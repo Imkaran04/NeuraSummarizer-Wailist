@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuraSummarizer Survey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Midnight Purple Ombre Background */
+        body {
+            background: linear-gradient(to bottom, #2c003e, #4b0082, #6a0dad);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Heading Styling */
+        h1, h2, h3 {
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Form Container */
+        .survey-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        /* Form Input Fields */
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px;
+        }
+        select.input-field option {
+    background: #4b0082;
+    color: white;
+}
+
+        /* Submit Button */
+        .submit-button {
+            background: linear-gradient(to right, #ff007f, #6a0dad);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+            display: inline-block;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            color: white;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+            box-shadow: 0px 0px 15px rgba(255, 0, 127, 0.6);
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            color: white;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- SURVEY FORM -->
+<div id="survey-container" class="survey-container bg-gray-900 text-white p-6 rounded-lg shadow-lg max-w-xl mx-auto">
+    <h1 class="text-3xl font-bold">📝 NeuraSummarizer User Survey</h1>
+    <p class="text-gray-300 text-sm mt-2">Help us improve! Your feedback is valuable. 🚀</p>
+
+    <form action="/submit-survey" method="POST">
+        <!-- Name -->
+        <input type="text" name="name" class="input-field mt-3" placeholder="Your Name" required>
+
+        <!-- Email -->
+        <input type="email" name="email" class="input-field mt-3" placeholder="Your Email" required>
+
+        <!-- How often do you summarize documents? -->
+        <label class="block mt-4 text-lg">How often do you summarize long texts?</label>
+        <select name="usage_frequency" class="input-field">
+            <option value="Daily">Daily</option>
+            <option value="A few times a week">A few times a week</option>
+            <option value="A few times a month">A few times a month</option>
+            <option value="Rarely">Rarely</option>
+        </select>
+
+        <!-- What do you summarize? -->
+        <label class="block mt-4 text-lg">What type of content do you usually summarize?</label>
+        <select name="content_type" class="input-field">
+            <option value="Research Papers">Research Papers</option>
+            <option value="News Articles">News Articles</option>
+            <option value="Legal Documents">Legal Documents</option>
+            <option value="Business Reports">Business Reports</option>
+            <option value="Books/Novels">Books/Novels</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <!-- Primary Goal -->
+        <label class="block mt-4 text-lg">What is your primary goal when summarizing?</label>
+        <select name="summary_goal" class="input-field">
+            <option value="Save time and quickly understand key points">Save time</option>
+            <option value="Extract insights for work/study">Extract insights</option>
+            <option value="Reduce information overload">Reduce information overload</option>
+        </select>
+
+        <!-- Feature Preference -->
+        <label class="block mt-4 text-lg">Which feature excites you the most?</label>
+        <select name="favorite_feature" class="input-field">
+            <option value="Instant Summarization">Instant Summarization</option>
+            <option value="AI-Powered Data Extraction">AI-Powered Data Extraction</option>
+            <option value="Legal Clause Detection">Legal Clause Detection</option>
+            <option value="Multiple Export Options">Multiple Export Options</option>
+        </select>
+
+        <!-- File Formats -->
+        <label class="block mt-4 text-lg">Which file formats do you need support for?</label>
+        <select name="file_formats" class="input-field">
+            <option value="PDF">PDF</option>
+            <option value="Word Documents (DOCX)">Word (DOCX)</option>
+            <option value="Text Files (TXT)">Text Files (TXT)</option>
+            <option value="Web Articles (URLs)">Web Articles</option>
+        </select>
+
+        <!-- Preferred Summary Length -->
+        <label class="block mt-4 text-lg">What summary length do you prefer?</label>
+        <select name="summary_length" class="input-field">
+            <option value="Very Short (1-2 sentences)">Very Short (1-2 sentences)</option>
+            <option value="Concise (bullet points)">Concise (Bullet Points)</option>
+            <option value="Medium (paragraph format)">Medium (Paragraph Format)</option>
+            <option value="Detailed (rewritten document)">Detailed</option>
+        </select>
+
+        <!-- Q&A Feature -->
+        <label class="block mt-4 text-lg">Would you like a feature for Q&A on documents?</label>
+        <select name="qa_feature" class="input-field">
+            <option value="Yes, very useful">Yes</option>
+            <option value="No, I don’t need this">No</option>
+            <option value="Maybe, depends on how it works">Maybe</option>
+        </select>
+
+        <!-- AI Summarization Experience -->
+        <label class="block mt-4 text-lg">Have you used an AI summarization tool before?</label>
+        <select name="ai_experience" class="input-field">
+            <option value="Yes, frequently">Yes, frequently</option>
+            <option value="Yes, occasionally">Yes, occasionally</option>
+            <option value="No, this will be my first time">No</option>
+        </select>
+
+        <!-- Issues Faced -->
+        <label class="block mt-4 text-lg">What problems have you faced with summarization tools?</label>
+        <select name="summary_issues" class="input-field">
+            <option value="Inaccurate summaries">Inaccurate summaries</option>
+            <option value="Too much irrelevant information">Too much irrelevant info</option>
+            <option value="Doesn’t support my file formats">File format issues</option>
+            <option value="Slow processing time">Slow processing time</option>
+        </select>
+
+        <!-- Willingness to Pay -->
+        <label class="block mt-4 text-lg">Would you pay for a premium version?</label>
+        <select name="willing_to_pay" class="input-field">
+            <option value="Yes, if it offers better accuracy">Yes</option>
+            <option value="No, I prefer free tools">No</option>
+            <option value="Maybe, if the price is right">Maybe</option>
+        </select>
+
+        <!-- Pricing Preference -->
+        <label class="block mt-4 text-lg">How much would you pay per month for premium features?</label>
+        <select name="pricing_preference" class="input-field">
+            <option value="$29 - $49">$29 - $49</option>
+            <option value="$49 - $129">$49 - $129</option>
+            <option value="$129 - $299">$129 - $299</option>
+            <option value="One-time purchase">One-time purchase</option>
+        </select>
+
+        <!-- Pricing Model -->
+        <label class="block mt-4 text-lg">Which pricing model do you prefer?</label>
+        <select name="pricing_model" class="input-field">
+            <option value="One-time purchase">One-time purchase</option>
+            <option value="Weekly subscription">Weekly subscription</option>
+            <option value="Monthly subscription">Monthly subscription</option>
+            <option value="6-months subscription">6-months subscription</option>
+            <option value="yearly subscription">yearly subscription</option>
+        </select>
+
+        <!-- Suggestions -->
+        <label class="block mt-4 text-lg">Any additional suggestions?</label>
+        <textarea name="suggestions" class="input-field" rows="4" placeholder="Your thoughts..."></textarea>
+
+        <!-- Submit & Close Buttons -->
+        <div class="mt-6 flex justify-between">
+            <button type="submit" class="submit-button bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+                🚀 Submit Survey
+            </button>
+        
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>

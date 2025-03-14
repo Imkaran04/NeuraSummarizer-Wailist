@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuraSummarizer - AI-Powered Document Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ url_for('static', filename='static\js\waitlist.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/waitlist.js') }}"></script>
+
+    <style>
+        /* Midnight Purple Ombre Background */
+        body {
+            background: linear-gradient(to bottom, #2c003e, #4b0082, #6a0dad);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Heading Styling */
+        h1, h2, h3 {
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Call-To-Action Button */
+        .cta-button {
+            background: linear-gradient(to right, #ff007f, #6a0dad);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+            box-shadow: 0px 0px 15px rgba(255, 0, 127, 0.6);
+        }
+
+        /* Feature Card Styling */
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+            width: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Testimonial Card Styling */
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Animation for Testimonials */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Security & Privacy Section */
+        .security-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .security-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .security-section ul li {
+            margin-bottom: 10px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Wider Sections and Cards */
+        .section {
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        /* Adjustments for the "How It Works" cards */
+        .how-it-works-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+            width: 100%;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+        }
+
+        .how-it-works-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Survey Section Styling */
+        .survey-section {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .survey-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .survey-section p {
+            font-size: 1.125rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .survey-button {
+            background: linear-gradient(to right, #ff007f, #6a0dad);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .survey-button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+            box-shadow: 0px 0px 15px rgba(255, 0, 127, 0.6);
+        }
+    </style>
+</head>
+<body class="text-white flex flex-col items-center">
+
+    <!-- HERO SECTION -->
+    <header class="text-center py-10 max-w-4xl w-full">
+        <h1 class="text-4xl">🚀 NeuraSummarizer: AI-Powered Document Mastery</h1>
+        <p class="text-lg mt-3 max-w-2xl mx-auto">Transform long documents into instant insights with AI-powered summarization, data extraction, and risk analysis.</p>
+        <button id="openWaitlistForm" class="survey-button">📩 Join the Waitlist</button>
+
+        </button>        <a href="/survey" class="cta-button mt-3">📝 Take the Survey</a>
+
+        <p class="text-sm mt-3 text-gray-300">🔥 First <b>250 users</b> get a <b>massive discount</b> on launch!</p>
+    </header>
+
+    <!-- WAITLIST FORM (Hidden by Default) -->
+    <div id="waitlist-form" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white text-black p-8 rounded-lg max-w-md w-full">
+            <h2 class="text-2xl font-bold text-center mb-4">Join the Waitlist</h2>
+            <p class="text-center text-gray-600 mb-4">Be among the first to experience NeuraSummarizer!</p>
+            <form id="waitlistSignup">
+                <input type="text" id="name" class="w-full p-2 border border-gray-300 rounded mb-3" placeholder="Your Name" required>
+                <input type="email" id="email" class="w-full p-2 border border-gray-300 rounded mb-3" placeholder="Your Email" required>
+                <input type="number" id="phone_no" class="w-full p-2 border border-gray-300 rounded mb-3" placeholder="Your Phone Number" required>
+                <input type="text" id="country" class="w-full p-2 border border-gray-300 rounded mb-3" placeholder="Your Country" required>
+                <input type="text" id="state" class="w-full p-2 border border-gray-300 rounded mb-3" placeholder="Your State (Optional)">
+                <input type="text" id="occupation" class="w-full p-2 border border-gray-300 rounded mb-3" placeholder="Your Occupation" required>
+                <button type="submit" class="w-full bg-purple-700 text-white p-2 rounded hover:bg-purple-800">Join Now</button>
+            </form>
+        </div>
+    </div>
+    
+
+    <!-- KEY BENEFITS & FEATURES -->
+    <section class="section text-center py-12">
+        <h2 class="text-3xl mb-8">Why Choose NeuraSummarizer?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <h3 class="text-xl flex items-center justify-center">🚀 Instant Summarization</h3>
+                <ul class="list-disc ml-5 mt-2">
+                    <li>🔹 Get 5-10 lines quick summaries instantly.</li>
+                    <li>🔹 Full-page summaries for deep insights.</li>
+                    <li>🔹 AI-powered Key Point Extraction.</li>
+                </ul>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <h3 class="text-xl flex items-center justify-center">📊 AI-Powered Data Extraction</h3>
+                <ul class="list-disc ml-5 mt-2">
+                    <li>✅ Extract tables, charts, graphs from files.</li>
+                    <li>✅ Detects financial data (Revenue, Profit, Loss).</li>
+                    <li>✅ Export data to Excel, JSON, CSV.</li>
+                </ul>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <h3 class="text-xl flex items-center justify-center">🚨 Legal Clause Detection</h3>
+                <ul class="list-disc ml-5 mt-2">
+                    <li>✅ Identify risky contract clauses.</li>
+                    <li>✅ Detect penalties & compliance risks.</li>
+                    <li>✅ AI-powered legal risk analysis.</li>
+                </ul>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <h3 class="text-xl flex items-center justify-center">📂 Multiple Export Options</h3>
+                <ul class="list-disc ml-5 mt-2">
+                    <li>✅ Export summaries to PDF, Word, Excel, CSV, JSON.</li>
+                    <li>✅ Convert summaries to editable reports.</li>
+                    <li>✅ On-premise & Cloud-based SaaS versions available.</li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="/join-waitlist" class="cta-button mt-8">📩 Join the Waitlist</a>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section text-center py-12">
+        <h2 class="text-3xl mb-8">How It Works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="how-it-works-card">
+                <h3 class="text-xl">1️⃣ Upload Your Document</h3>
+                <p>Drag & drop PDFs, DOCX, or TXT.</p>
+            </div>
+            <div class="how-it-works-card">
+                <h3 class="text-xl">2️⃣ AI Summarizes & Answers Questions</h3>
+                <p>Choose summary length & ask questions.</p>
+            </div>
+            <div class="how-it-works-card">
+                <h3 class="text-xl">3️⃣ Export & Share</h3>
+                <p>Save as TXT, DOCX, or PDF.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SURVEY SECTION -->
+    <section class="survey-section">
+        <h2>Your Feedback is Essential for Improvement!</h2>
+        <p>We want to make NeuraSummarizer the best tool for you. Please take a few moments to share your thoughts and help us enhance the features you care about.</p>
+        <a href="/survey" class="survey-button">📝 Take the Survey</a>
+    </section>
+
+<!-- SECURITY & PRIVACY SECTION -->
+<section class="section mt-12 text-center">
+    <h2 class="text-3xl mb-8">Security & Privacy</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1: No Data Stored -->
+        <div class="feature-card">
+            <h3 class="text-xl">🔒 No Data Stored</h3>
+            <p>Free-tier users' data is deleted after processing.</p>
+        </div>
+
+        <!-- Card 2: End-to-End Encryption -->
+        <div class="feature-card">
+            <h3 class="text-xl">✅ End-to-End Encryption</h3>
+            <p>Your files remain secure.</p>
+        </div>
+
+        <!-- Card 3: Enterprise-Grade Security -->
+        <div class="feature-card">
+            <h3 class="text-xl">✅ Enterprise-Grade Security</h3>
+            <p>On-premise solutions for full control.</p>
+        </div>
+    </div>
+</section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section mt-12">
+        <h2 class="text-3xl mb-8">What Users Are Saying</h2>
+
+        <div class="testimonial-card">
+            <p>"NeuraSummarizer has transformed how we analyze contracts and financial reports. It's a game changer!"</p>
+            <p>- Sarah, Legal Consultant</p>
+        </div>
+
+        <div class="testimonial-card">
+            <p>"I love how I can extract tables and graphs. Saves me hours of work!"</p>
+            <p>- Mark, Data Analyst</p>
+        </div>
+    </section>
+
+      <!-- FREQUENTLY ASKED DOUBTS SECTION -->
+      <section class="faq-section mt-12 max-w-4xl w-full text-center">
+        <h2 class="text-3xl mb-6">Frequently Asked Doubts</h2>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Doubt 1 -->
+            <div class="feature-card">
+                <h3 class="text-xl font-semibold">Q: How do I upload my documents?</h3>
+                <p>A: Simply drag and drop your PDF, DOCX, or TXT files into the uploader. You can also browse your computer to select the file directly.</p>
+            </div>
+    
+            <!-- Doubt 2 -->
+            <div class="feature-card">
+                <h3 class="text-xl font-semibold">Q: What kind of documents can I upload?</h3>
+                <p>A: Currently, we support PDFs, DOCX (Microsoft Word), and TXT files. You can upload any document in these formats, regardless of their content.</p>
+            </div>
+    
+            <!-- Doubt 3 -->
+            <div class="feature-card">
+                <h3 class="text-xl font-semibold">Q: Can I export the summaries to other formats?</h3>
+                <p>A: Yes! Once your document is summarized, you can export the summary to a variety of formats including PDF, DOCX, TXT, and even Excel or CSV for data extraction purposes.</p>
+            </div>
+    
+            <!-- Doubt 4 -->
+            <div class="feature-card">
+                <h3 class="text-xl font-semibold">Q: How accurate is the AI summarization?</h3>
+                <p>A: Our AI model is trained on a vast range of documents, from research papers to legal contracts. While it is highly accurate, you can always review and fine-tune the summaries for any specifics you're concerned about.</p>
+            </div>
+    
+            <!-- Doubt 5 -->
+            <div class="feature-card">
+                <h3 class="text-xl font-semibold">Q: Is my data safe with NeuraSummarizer?</h3>
+                <p>A: Absolutely! We prioritize your privacy and security. All data is encrypted end-to-end, and we ensure that free-tier users' data is automatically deleted after processing. For paid users, we also offer enterprise-grade security options with on-premise solutions.</p>
+            </div>
+    
+            <!-- Doubt 6 -->
+            <div class="feature-card">
+                <h3 class="text-xl font-semibold">Q: How long does the summarization take?</h3>
+                <p>A: The time it takes depends on the length and complexity of your document. For most standard documents, it should only take a few seconds to a minute. Longer or more complex documents may take a bit longer to analyze.</p>
+            </div>
+        </div>
+    </section>
+    
+        <!-- FOOTER -->
+        <footer class="mt-12">
+            <p>© 2025 NeuraSummarizer. All rights reserved.</p>
+        </footer>
+    
+        <script src="{{ url_for('static', filename='js/waitlist.js') }}"></script>
+
+</body>
+</html>
