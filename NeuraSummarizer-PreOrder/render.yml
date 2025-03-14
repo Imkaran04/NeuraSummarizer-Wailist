@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: waitlist-app  # Change to your app name
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+    startCommand: gunicorn -w 4 -b 0.0.0.0:10000 app:app
+    envVars:
+      - key: WAITLIST_DB_URL
+        value: "sqlite:///./waitlist.db"
+      - key: SURVEY_DB_URL
+        value: "sqlite:///./survey.db"
+    plan: free  # Change to "starter" or higher for production
+    autoDeploy: true  # Automatically deploy changes
